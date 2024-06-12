@@ -1,6 +1,6 @@
-# Project Title
+# Ecommerce Project
 
-Ecommerce Project test for Frontend Developers
+This is a test for Frontend Developers
 
 ### Running the website
 
