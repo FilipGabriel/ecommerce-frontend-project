@@ -52,6 +52,7 @@
 
 <script>
 import ImageModal from '@/components/ImageModal.vue'
+import { useToast } from "vue-toastification";
 export default {
     components: {
         ImageModal
@@ -102,9 +103,18 @@ export default {
             this.activeImageKey = value
         },
         addToCart() {
+            const toast = useToast();
+            if(this.product_info.qty === 0) {
+                toast.error('Cantitatea minimă este de o bucată!', { timeout: 2000 });
+                return
+            }
+
             let objectToAdd = JSON.parse(JSON.stringify(this.product_info))
             this.$store.dispatch('cart/addCartItem', objectToAdd)
             this.product_info.qty = 1
+
+
+            toast.success('Produsul a fost adăugat în coș!', { timeout: 2000 });
         }
     }
 }

@@ -56,7 +56,7 @@
                                             <img src="@/assets/icon-delete.svg" alt="icon delete">
                                         </div>
                                     </div>
-                                    <div class="btn btn-primary w-100 mt-3">Checkout</div>
+                                    <div class="btn btn-primary w-100 mt-3" @click="showConfetti()">Checkout</div>
                                 </div>
                                 <div v-else class="empty-cart">
                                     <p>Your cart is empty.</p>
@@ -74,6 +74,8 @@
 </template>
 
 <script>
+import confetti from "https://cdn.skypack.dev/canvas-confetti"
+import {useToast} from "vue-toastification";
 
 export default {
     name: 'Header',
@@ -109,7 +111,47 @@ export default {
         },
         deleteProduct(id) {
             this.$store.dispatch('cart/removeCartItem', id)
-        }
+        },
+        showConfetti() {
+            const toast = useToast();
+            toast.success('Ai finalizat comanda cu succes!', { timeout: 2000 });
+
+            const count = 100
+
+            const defaults = {
+                origin: { y: 0.7 },
+                zIndex: 99999999999,
+            }
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio),
+                }))
+            }
+
+            fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+            })
+            fire(0.2, {
+                spread: 60,
+            })
+            fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8,
+            })
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                scalar: 1.2,
+            })
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+            })
+        },
     }
 }
 </script>

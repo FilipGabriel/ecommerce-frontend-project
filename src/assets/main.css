@@ -18,5 +18,18 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
+
+/* TOAST CSS */
+.Vue-Toastification__toast {
+  padding: 6px 10px !important;
+  min-height: 45px !important;
+  align-items: center;
+}
+.Vue-Toastification__progress-bar, .Vue-Toastification__close-button{
+  opacity: 0 !important;
+}
+.Vue-Toastification__toast-body {
+  font-size: 14px !important;
+  font-weight: 500;
+  line-height: initial !important;
 }
